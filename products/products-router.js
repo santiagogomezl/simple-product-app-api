@@ -13,7 +13,7 @@ const serializeProduct = product => ({
     weight: product.weight,
     lenght: product.lenght,
     diameter: product.weight,
-    images: xss(product.images),
+    images: product.images,
     details: xss(product.details)
 })
 
