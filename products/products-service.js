@@ -1,6 +1,6 @@
 const ProductsService = {
-    getAllProducts(knex) {
-      return knex.select('*').from('simpleproduct_products')
+    getAllProducts(knexInstance) {
+      return knexInstance.select('*').from('simpleproduct_products')
     },
   
   

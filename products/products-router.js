@@ -1,4 +1,4 @@
-const path = require('path')
+//const path = require('path')
 const express = require('express')
 const xss = require('xss')
 const ProductsService = require('./products-service')
@@ -12,7 +12,7 @@ const serializeProduct = product => ({
     logo: xss(product.logo),
     weight: product.weight,
     lenght: product.lenght,
-    diameter: product.weight,
+    diameter: product.diameter,
     images: product.images,
     details: xss(product.details)
 })

@@ -4,7 +4,7 @@ VALUES
     (
         'Barone',
         150, 
-        'logo-one.png',
+        'logo-one.jpg',
         45,
         7,
         2,
@@ -19,7 +19,7 @@ VALUES
     (
         'Bartwo',
         120, 
-        'logo-two.png',
+        'logo-two.jpg',
         35,
         7,
         2,
@@ -34,7 +34,7 @@ VALUES
     (
         'Barthree',
         120, 
-        'logo-three.png',
+        'logo-three.jpg',
         35,
         5,
         2,
@@ -49,7 +49,7 @@ VALUES
     (
         'Barfour',
         180, 
-        'logo-four.png',
+        'logo-four.jpg',
         45,
         7,
         2,
