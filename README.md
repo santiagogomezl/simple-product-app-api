@@ -1,6 +1,6 @@
-# Express Boilerplate!
+# Simple Product API
 
-This is a boilerplate project used for starting new projects!
+This API serves the store data to my Simple Product App. Providing product information and data.
 
 ## Set up
 
