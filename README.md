@@ -15,6 +15,6 @@ Will retrieve all products in the store
 
 `GET /api/products/:product_id`
 
-Will retrieve one single product with id=product_id
+Will retrieve one single product with `id=product_id`
 
 
