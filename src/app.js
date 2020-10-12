@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-const {CLIENT_ORIGIN} = require('./config');
+const {CLIENT_ORIGIN} = require('./config')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const productsRouter = require('../products/products-router.js')
@@ -29,8 +29,8 @@ app.use('/api/products', productsRouter)
 
 app.get('/', (req, res) => {
   res
-    .send('Hello Express!');
-});
+    .send('Hello Express!')
+})
 
 app.use(function errorHandler(error, req, res, next) {
   let response

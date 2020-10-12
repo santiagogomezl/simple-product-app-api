@@ -84,9 +84,9 @@ describe('Express App', () => {
   it('should return a message from GET /', () => {
     return supertest(app)
       .get('/')
-      .expect(200, 'Hello Express!');
-  });
-});
+      .expect(200, 'Hello Express!')
+  })
+})
 
 
 describe('Simple Product API', () => {
