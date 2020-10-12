@@ -17,6 +17,7 @@ const serializeProduct = product => ({
     details: xss(product.details)
 })
 
+//Endpoints to GET products
 productsRouter
   .route('/')
   .get((req, res, next) => {
@@ -28,6 +29,7 @@ productsRouter
       .catch(next)
   })    
 
+  //GET product by ID
   productsRouter
   .route('/:product_id')
   .all((req, res, next) => {

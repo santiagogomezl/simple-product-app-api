@@ -1,8 +1,9 @@
 const ProductsService = {
+
+    //Use knew instance to build query to database
     getAllProducts(knexInstance) {
       return knexInstance.select('*').from('simpleproduct_products')
     },
-  
   
     getById(knex, id) {
       return knex

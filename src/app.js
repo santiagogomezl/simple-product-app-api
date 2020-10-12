@@ -15,6 +15,7 @@ app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
 app.use(cors())
 app.use(helmet())
 
+//Validate API TOKEN
 app.use(function validateBearerToken(req, res, next) {
     const apiToken = process.env.API_TOKEN
     const authToken = req.get('Authorization')
@@ -25,6 +26,7 @@ app.use(function validateBearerToken(req, res, next) {
     next()
 })
 
+//Endpoints to access store data
 app.use('/api/products', productsRouter)
 
 app.get('/', (req, res) => {
