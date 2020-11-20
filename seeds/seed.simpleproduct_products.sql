@@ -1,13 +1,28 @@
 INSERT INTO simpleproduct_products 
-    (name, price, logo, weight, lenght, diameter, images, details) 
+    (name, price, logo, features,images, details) 
 VALUES
     (
         'Barone',
         150, 
         'logo-one.jpg',
-        45,
-        7,
-        2,
+        '[
+            {
+                "feature_id": 1,
+                "feature_value": 45
+            },
+            {
+                "feature_id": 2,
+                "feature_value": 7
+            },
+            {
+                "feature_id": 3,
+                "feature_value": 2
+            },
+            {
+                "feature_id": 4,
+                "feature_value": 1
+            }  
+        ]',
         '{
             "image-one-one.jpg",
             "image-one-two.jpg",
@@ -20,9 +35,24 @@ VALUES
         'Bartwo',
         120, 
         'logo-two.jpg',
-        35,
-        7,
-        2,
+        '[
+            {
+                "feature_id": 1,
+                "feature_value": 35
+            },
+            {
+                "feature_id": 2,
+                "feature_value": 7
+            },
+            {
+                "feature_id": 3,
+                "feature_value": 2
+            },
+            {
+                "feature_id": 4,
+                "feature_value": 1
+            }  
+        ]',
         '{
             "image-two-one.jpg",
             "image-two-two.jpg",
@@ -35,9 +65,24 @@ VALUES
         'Barthree',
         120, 
         'logo-three.jpg',
-        35,
-        5,
-        2,
+        '[
+            {
+                "feature_id": 1,
+                "feature_value": 35
+            },
+            {
+                "feature_id": 2,
+                "feature_value": 5
+            },
+            {
+                "feature_id": 3,
+                "feature_value": 2
+            },
+            {
+                "feature_id": 4,
+                "feature_value": 1
+            }  
+        ]',
         '{
             "image-three-one.jpg",
             "image-three-two.jpg",
@@ -50,9 +95,24 @@ VALUES
         'Barfour',
         180, 
         'logo-four.jpg',
-        45,
-        7,
-        2,
+        '[
+            {
+                "feature_id": 1,
+                "feature_value": 45
+            },
+            {
+                "feature_id": 2,
+                "feature_value": 7
+            },
+            {
+                "feature_id": 3,
+                "feature_value": 2
+            },
+            {
+                "feature_id": 4,
+                "feature_value": 1
+            }  
+        ]',
         '{
             "image-four-one.jpg",
             "image-four-two.jpg",

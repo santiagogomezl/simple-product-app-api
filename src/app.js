@@ -2,10 +2,11 @@ require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-const {CLIENT_ORIGIN} = require('./config')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const productsRouter = require('../products/products-router.js')
+const storeRouter = require('../store/store-router.js')
+
 
 const app = express()
 
@@ -15,7 +16,7 @@ app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
 app.use(cors())
 app.use(helmet())
 
-//Validate API TOKEN
+// Validate API TOKEN
 app.use(function validateBearerToken(req, res, next) {
     const apiToken = process.env.API_TOKEN
     const authToken = req.get('Authorization')
@@ -27,6 +28,7 @@ app.use(function validateBearerToken(req, res, next) {
 })
 
 //Endpoints to access store data
+app.use('/api/store', storeRouter)
 app.use('/api/products', productsRouter)
 
 app.get('/', (req, res) => {

@@ -3,9 +3,7 @@ CREATE TABLE simpleproduct_products (
     name TEXT NOT NULL,
     price INT NOT NULL,
     logo TEXT NOT NULL,
-    weight INT NOT NULL,
-    lenght INT NOT NULL,
-    diameter INT NOT NULL,
+    features JSONB NOT NULL,
     images TEXT[] NOT NULL,
     details TEXT NOT NULL
 );
