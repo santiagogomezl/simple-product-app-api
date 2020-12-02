@@ -1,10 +1,10 @@
 # Simple Product API
 
-This API serves the data to the Simple Product App providing store and products information and details, and render it on the Simple Product App
+This API serves the data to the Simple Product App, providing store and product information to the Simple Product App.
 
 ## Summary
 
-After setting up your postgres database and seeding the store data, you can manage and retrieve the information, and render it on the Simple Product App
+After setting up your postgres database and seeding the store data, you can retrieve the information, and render it on the Simple Product App
 
 ## Endpoints
 
