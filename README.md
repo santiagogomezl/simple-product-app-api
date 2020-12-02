@@ -10,7 +10,7 @@ After setting up your postgres database and seeding the store data, you can retr
 
 ### Store
 
-`GET /api/store` Will retrieve the store data
+`GET /api/store` will retrieve the store data
 
 `PATCH /api/store/:store_id` will update store with `id=store_id`
 
