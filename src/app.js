@@ -16,6 +16,10 @@ app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
 app.use(cors())
 app.use(helmet())
 
+//middleware to serve public assets i.e images
+app.use('/public', express.static('public'))
+
+
 // Validate API TOKEN
 app.use(function validateBearerToken(req, res, next) {
     const apiToken = process.env.API_TOKEN

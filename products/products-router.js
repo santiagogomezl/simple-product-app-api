@@ -1,10 +1,23 @@
-//const path = require('path')
 const express = require('express')
 const xss = require('xss')
+const multer = require('multer')
 const ProductsService = require('./products-service')
+const { render } = require('../src/app')
 
 const productsRouter = express.Router()
 const jsonParser = express.json()
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public' )
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, `${file.originalname}-${uniqueSuffix}`)
+  }
+})
+
+const upload = multer({ storage: storage }).any()
 
 const serializeProduct = product => ({
     id: product.id,
@@ -21,19 +34,51 @@ const serializeProduct = product => ({
     })
 })
 
-//Endpoints to GET products
+// Endpoints to GET products
 productsRouter
   .route('/')
   .get((req, res, next) => {
     const knexInstance = req.app.get('db')
     ProductsService.getAllProducts(knexInstance)
       .then(products => {
-        res.json(products.map(serializeProduct))
+
+        const parsedProducts = products.map(product => {
+          let features = product.features
+          features = typeof(features) === 'string' ? JSON.parse(features) : features
+          return(
+            {
+              id: product.id,
+              name: product.name,
+              details: product.details,
+              price: product.price,
+              logo: product.logo,
+              features: features,
+              images: product.images
+            }
+          )
+        })
+
+        res.json(parsedProducts.map(serializeProduct))
       })
       .catch(next)
   })
-  .post(jsonParser, (req, res, next) => {
-    const { name, price, logo, features, images, details } = req.body
+  .post( upload, (req, res, next) => {
+
+    const { id, name, price, features, details } = req.body
+    let { logo, images } = req.body
+
+    if(!logo){
+      logo = req.files.find(file => file.fieldname === 'logo')
+      logo = logo.filename
+    }
+
+    if(!images){
+      images = req.files.filter(file => file.fieldname === 'images')
+      images = images.map(image => { return image.filename })
+    }else{
+      images = JSON.parse(images)
+    }
+ 
     const newProduct = { name, price, logo, features, images, details }
 
     for (const [key, value] of Object.entries(newProduct)) {
@@ -48,18 +93,28 @@ productsRouter
       req.app.get('db'),
       newProduct
     )
-    .then(product => {
-      res
-        .status(201)
-        .json(serializeProduct(product))
-    })
-    .catch(next)
+    .then( product => {
+        let features = product.features
+        features = typeof(features) === 'string' ? JSON.parse(features) : features
+        const parsedProduct =
+          {
+            id: req.params.product_id,
+            name: product.name,
+            details: product.details,
+            price: product.price,
+            logo: product.logo,
+            features: features,
+            images: product.images
+          }
+        res.json(serializeProduct(parsedProduct)).status(201)
+      })
+      .catch(next)
 
   })   
 
   productsRouter
   .route('/:product_id')
-  .all((req, res, next) => {
+  .all(jsonParser, (req, res, next) => {
     ProductsService.getById(
       req.app.get('db'),
       req.params.product_id
@@ -70,12 +125,25 @@ productsRouter
             error: { message: `Product doesn't exist` }
           })
         }
-        res.product = product
+        
+        let { features } = product
+        features = typeof(features) === 'string' ? JSON.parse(features) : features
+        
+        res.product = {
+          id: product.id,
+          name: product.name,
+          details: product.details,
+          price: product.price,
+          logo: product.logo,
+          features: features,
+          images: product.images
+        }
+        
         next()
       })
       .catch(next)
   })
-  .get((req, res, next) => {
+  .get( (req, res, next) => {
     res.json(serializeProduct(res.product))
   })
   .delete((req, res, next) => {
@@ -88,28 +156,54 @@ productsRouter
       })
       .catch(next)
   })
-  .patch(jsonParser, (req, res, next) => {
-    const { name, price, logo, features, images, details } = req.body
-    const product = { name, price, logo, features, images, details }
+  .patch( upload, (req, res, next) => {
 
+    const { id, name, price, features, details } = req.body
+    let { logo, images } = req.body
+
+    if(!logo){
+      logo = req.files.find(file => file.fieldname === 'logo')
+      logo = logo.filename
+    }
+
+    if(!images){
+      images = req.files.filter(file => file.fieldname === 'images')
+      images = images.map(image => { return image.filename })
+    }else{
+      images = JSON.parse(images)
+    }
+ 
+    const product = { name, price, features, details, logo, images }
     const numberOfValues = Object.values(product).filter(Boolean).length
     if (numberOfValues === 0) {
       return res.status(400).json({
         error: {
-          message: `Request body must contain either 'name', 'last name' or 'email'`
+          message: `Request body must contain either 'name', 'details',  or 'price'`
         }
       })
     }
 
     ProductsService.updateProduct(
-        req.app.get('db'),
-        req.params.product_id,
-        product
-       )
-         .then(() => {
-           res.json(res.product).status(204).end()
-         })
-         .catch(next)
+      req.app.get('db'),
+      req.params.product_id,
+      product
+      )
+      .then(() => {
+          let features = product.features
+          features = typeof(features) === 'string' ? JSON.parse(features) : features
+          const parsedProduct =
+            {
+              id: req.params.product_id,
+              name: product.name,
+              details: product.details,
+              price: product.price,
+              logo: product.logo,
+              features: features,
+              images: product.images
+            }
+        res.json(serializeProduct(parsedProduct)).status(204).end()
+      })
+      .catch(next)
     })
   
 module.exports = productsRouter
