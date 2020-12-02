@@ -1,5 +1,5 @@
 INSERT INTO simpleproduct_products 
-    (name, price, logo, features,images, details) 
+    (name, price, logo, features, images, details) 
 VALUES
     (
         'Barbell Model A',
@@ -8,19 +8,19 @@ VALUES
         '[
             {
                 "feature_id": 1,
-                "feature_value": 45lb
+                "feature_value": "45lb"
             },
             {
                 "feature_id": 2,
-                "feature_value": 7ft
+                "feature_value": "7ft"
             },
             {
                 "feature_id": 3,
-                "feature_value": 2in
+                "feature_value": "2in"
             },
             {
                 "feature_id": 4,
-                "feature_value": 1 year
+                "feature_value": "1 year"
             }  
         ]',
         '{
@@ -38,19 +38,19 @@ VALUES
         '[
             {
                 "feature_id": 1,
-                "feature_value": 35lb
+                "feature_value": "35lb"
             },
             {
                 "feature_id": 2,
-                "feature_value": 7ft
+                "feature_value": "7ft"
             },
             {
                 "feature_id": 3,
-                "feature_value": 2in
+                "feature_value": "2in"
             },
             {
                 "feature_id": 4,
-                "feature_value": 1 year
+                "feature_value": "1 year"
             }  
         ]',
         '{
@@ -68,19 +68,19 @@ VALUES
         '[
             {
                 "feature_id": 1,
-                "feature_value": 35lb
+                "feature_value": "35lb"
             },
             {
                 "feature_id": 2,
-                "feature_value": 5ft
+                "feature_value": "5ft"
             },
             {
                 "feature_id": 3,
-                "feature_value": 2in
+                "feature_value": "2in"
             },
             {
                 "feature_id": 4,
-                "feature_value": 1 year
+                "feature_value": "1 year"
             }  
         ]',
         '{
@@ -98,19 +98,19 @@ VALUES
         '[
             {
                 "feature_id": 1,
-                "feature_value": 45lb
+                "feature_value": "45lb"
             },
             {
                 "feature_id": 2,
-                "feature_value": 7ft
+                "feature_value": "7ft"
             },
             {
                 "feature_id": 3,
-                "feature_value": 2in
+                "feature_value": "2in"
             },
             {
                 "feature_id": 4,
-                "feature_value": 1 year
+                "feature_value": "1 year"
             }  
         ]',
         '{
